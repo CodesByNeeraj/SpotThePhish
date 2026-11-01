@@ -2,7 +2,7 @@ from typing import Literal
 from pydantic import BaseModel
 
 class OrchestratorAgentOutput(BaseModel):
-    tool_name:Literal["email_agent","quiz_agent","quiz_feedback_agent"]
+    tool_name:Literal["email_agent","quiz_agent","quiz_feedback_agent"] | None
     #logged
     reason_for_tool:str
     response_to_user:str
@@ -10,7 +10,7 @@ class OrchestratorAgentOutput(BaseModel):
 class EmailAgentOutput(BaseModel):
     #logged
     tool_name:Literal["web_search"]
-    #loggedw
+    #logged
     category:str
     #logged
     web_search_url:str
@@ -42,6 +42,11 @@ class QuestionFeedback(BaseModel):
 
 class QuizFeedbackAgentOutput(BaseModel):
     feedback: list[QuestionFeedback]
+    
+class OffTopicGuardRailAgentOutput(BaseModel):
+    classification:bool
+    reason:str
+    
 
     
     
