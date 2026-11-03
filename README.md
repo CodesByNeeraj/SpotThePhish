@@ -19,7 +19,35 @@ The user then tries to spot the red flags in the email. An AI agent guides the c
 
 ## Try out SpotThePhish
 
-todo
+SpotThePhish is live at **[spotthephish-platform.up.railway.app](https://spotthephish-platform.up.railway.app/)**. Choose a category, click "Generate phishing email" and start spotting signs of phishing.
+
+### Run it locally
+
+You need Python 3, Node.js and an OpenAI API key.
+
+1. Create a file named `backend/.env` and add your key. See `backend/.env.example` for the format.
+
+   ```
+   OPENAI_API_KEY=your-key-here
+   ```
+
+2. Start the backend. In terminal 1, from the `backend/` folder:
+
+   ```
+   pip install -r ../requirements.txt
+   uvicorn main:app --reload
+   ```
+
+3. Start the frontend. In terminal 2, from the `frontend/` folder:
+
+   ```
+   npm install
+   npm run dev
+   ```
+
+4. Open the address that Vite prints (usually `http://localhost:5173`). In development, the frontend sends its `/api` requests to the backend on port 8000.
+
+Note: sessions are kept in memory, so restarting the backend (including the automatic restart from `--reload`) ends all active sessions.
 
 ## Product Walkthrough
 
