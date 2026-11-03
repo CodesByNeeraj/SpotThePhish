@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const HEIGHT = 256;
-// How much of the ocean shows at the bottom of the window before the page is scrolled down to it.
-const PEEK = 100;
 const WAVE_SEGMENTS = 160;
 
 // Back to front. Fish swim between the layers, so the nearer waves tint them like water would.
@@ -179,8 +177,8 @@ export default function Ocean() {
     <div
       ref={container}
       aria-hidden="true"
-      className="pointer-events-none sticky shrink-0"
-      style={{ height: HEIGHT, bottom: PEEK - HEIGHT }}
+      className="pointer-events-none shrink-0"
+      style={{ height: HEIGHT }}
     />
   );
 }
