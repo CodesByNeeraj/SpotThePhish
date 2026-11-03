@@ -72,11 +72,27 @@ Both guardrails run on the user's latest message before the orchestrator agent s
 
    ![Prompt injection guardrail code](gallery/inputguardrailcode.png)
 
+   Example: an attempted prompt injection to retrieve the system prompt is rejected.
+
+   ![Prompt injection attempt rejected in the chat](gallery/promptinjectiononchat.png)
+
+   The trace shows the guardrail tripping before any agent runs.
+
+   ![Trace of the prompt injection guardrail](gallery/promptinjectionguardrailtrace.png)
+
 2. Off-topic Guardrail
 
    An LLM checks whether the user's message is grounded in the purpose of the platform. It also catches injection attempts that the pattern list misses. Because this guardrail is itself a model reading user text, it narrows the risk but cannot remove it. It is limited to a yes/no output (in itself a guardrail) and is told to treat the message strictly as data to classify.
 
    ![Off-topic guardrail agent code](gallery/offtopicguardrailagentcode.png)
+
+   Example: a message unrelated to phishing awareness is rejected.
+
+   ![Off-topic message rejected in the chat](gallery/offtopicchat.png)
+
+   The trace shows the off-topic guardrail agent running and flagging the message.
+
+   ![Trace of the off-topic guardrail](gallery/offtopicguardrailtrace.png)
 
 ### Tool Call Security
 
