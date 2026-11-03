@@ -55,7 +55,7 @@ export default function ChatPanel({ messages, active, loading, tip, onSend }) {
   return (
     <section className="flex min-h-0 flex-col">
       <h2 className="mb-3 text-sm font-semibold text-ink">Conversation</h2>
-      <div className="flex h-[38rem] flex-col rounded-ui border border-line">
+      <div className="flex h-[calc(100vh-16rem)] min-h-[24rem] flex-col rounded-ui border border-line">
         <div ref={scrollRef} className="relative flex flex-1 flex-col gap-3 overflow-y-auto p-4">
           {messages.length === 0 && !loading && (
             <p className="m-auto text-sm text-ink-subtle">
