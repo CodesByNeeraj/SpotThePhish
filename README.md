@@ -98,10 +98,6 @@ Both guardrails run on the user's latest message before the orchestrator agent s
 
 The web search tool is restricted to an allowlist of trusted domains, which prevents the agent from reading malicious websites.
 
-### Protecting the Quiz Answers
-
-While the user is answering the quiz, the orchestrator agent has no access to the correct answers, so it cannot leak them by accident or through manipulation. It only sees them after the user submits, when it relays the feedback. This is enforced in code rather than with a prompt instruction (see Key Decisions Made).
-
 ## Tech Stack Used
 
 - **Backend:** Python, FastAPI, OpenAI Agents SDK, Pydantic
