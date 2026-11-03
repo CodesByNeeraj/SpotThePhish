@@ -19,31 +19,7 @@ The user then tries to spot the red flags in the email. An AI agent guides the c
 
 ## Try out SpotThePhish
 
-You need Python 3, Node.js and an OpenAI API key.
-
-1. Create a file named `backend/.env` and add your key. See `backend/.env.example` for the format.
-
-   ```
-   OPENAI_API_KEY=your-key-here
-   ```
-
-2. Start the backend. In terminal 1, from the `backend/` folder:
-
-   ```
-   pip install -r ../requirements.txt
-   uvicorn main:app --reload
-   ```
-
-3. Start the frontend. In terminal 2, from the `frontend/` folder:
-
-   ```
-   npm install
-   npm run dev
-   ```
-
-4. Open the address that Vite prints (usually `http://localhost:5173`). The frontend sends its `/api` requests to the backend on port 8000.
-
-Note: sessions are kept in memory, so restarting the backend (including the automatic restart from `--reload`) ends all active sessions.
+todo
 
 ## Product Walkthrough
 
@@ -98,7 +74,7 @@ Both guardrails run on the user's latest message before the orchestrator agent s
 
 2. Off-topic Guardrail
 
-   An LLM checks whether the user's message is grounded in the purpose of the platform. It also catches injection attempts that the pattern list misses. Because this guardrail is itself a model reading user text, it narrows the risk but cannot remove it. It is limited to a yes/no output and is told to treat the message strictly as data to classify.
+   An LLM checks whether the user's message is grounded in the purpose of the platform. It also catches injection attempts that the pattern list misses. Because this guardrail is itself a model reading user text, it narrows the risk but cannot remove it. It is limited to a yes/no output (in itself a guardrail) and is told to treat the message strictly as data to classify.
 
    ![Off-topic guardrail agent code](gallery/offtopicguardrailagentcode.png)
 
@@ -108,7 +84,7 @@ The web search tool is restricted to an allowlist of trusted domains, which prev
 
 ### Protecting the Quiz Answers
 
-Quiz answers are never exposed to the orchestrator agent, so it cannot leak them by accident or through manipulation. This is enforced in code rather than with a prompt instruction (see Key Decisions Made).
+While the user is answering the quiz, the orchestrator agent has no access to the correct answers, so it cannot leak them by accident or through manipulation. It only sees them after the user submits, when it relays the feedback. This is enforced in code rather than with a prompt instruction (see Key Decisions Made).
 
 ## Tech Stack Used
 
@@ -131,7 +107,7 @@ Quiz answers are never exposed to the orchestrator agent, so it cannot leak them
 
    The SDK has clear documentation, useful built-in features and built-in tracing.
 
-   - **Custom output extractor:** when the quiz agent runs as a tool, an extractor saves the full quiz (with answers) in a server-side context and returns only the questions and options to the orchestrator. The feedback agent reads the full quiz from that context. The orchestrator never sees the answers.
+   - **Custom output extractor:** when the quiz agent runs as a tool, an extractor saves the full quiz (with answers) in a server-side context and returns only the questions and options to the orchestrator. The feedback agent reads the full quiz from that context. The orchestrator only sees the answers after the user submits, when it relays the feedback.
 
      ![Custom output extractor code](gallery/customoutputextractor.png)
 
