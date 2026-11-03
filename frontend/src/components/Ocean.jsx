@@ -1,23 +1,25 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const HEIGHT = 160;
+const HEIGHT = 256;
+// How much of the ocean shows at the bottom of the window before the page is scrolled down to it.
+const PEEK = 100;
 const WAVE_SEGMENTS = 160;
 
 // Back to front. Fish swim between the layers, so the nearer waves tint them like water would.
 const WAVES = [
-  { color: "#cfe2fc", opacity: 0.9, base: 104, amp: [7, 3], speed: [0.5, 0.8], length: [260, 130], order: 0 },
-  { color: "#8db9f2", opacity: 0.6, base: 82, amp: [8, 3], speed: [0.7, 1.0], length: [320, 150], order: 2 },
-  { color: "#0c66e4", opacity: 0.35, base: 52, amp: [6, 2.5], speed: [0.9, 1.3], length: [220, 110], order: 4 },
+  { color: "#cfe2fc", opacity: 0.9, base: 200, amp: [7, 3], speed: [0.5, 0.8], length: [260, 130], order: 0 },
+  { color: "#8db9f2", opacity: 0.6, base: 178, amp: [8, 3], speed: [0.7, 1.0], length: [320, 150], order: 2 },
+  { color: "#0c66e4", opacity: 0.35, base: 148, amp: [6, 2.5], speed: [0.9, 1.3], length: [220, 110], order: 4 },
 ];
 
 const FISH = [
-  { color: "#f6ad55", y: 70, size: 1.0, speed: 38, order: 1 },
-  { color: "#ffffff", y: 92, size: 0.8, speed: 26, order: 1 },
-  { color: "#ffffff", y: 48, size: 1.2, speed: 44, order: 1 },
-  { color: "#fbd38d", y: 66, size: 0.9, speed: 32, order: 3 },
-  { color: "#ffffff", y: 30, size: 1.1, speed: 22, order: 3 },
-  { color: "#f6ad55", y: 40, size: 0.7, speed: 50, order: 3 },
+  { color: "#f6ad55", y: 166, size: 1.0, speed: 38, order: 1 },
+  { color: "#ffffff", y: 188, size: 0.8, speed: 26, order: 1 },
+  { color: "#ffffff", y: 144, size: 1.2, speed: 44, order: 1 },
+  { color: "#fbd38d", y: 162, size: 0.9, speed: 32, order: 3 },
+  { color: "#ffffff", y: 126, size: 1.1, speed: 22, order: 3 },
+  { color: "#f6ad55", y: 136, size: 0.7, speed: 50, order: 3 },
 ];
 
 function waveHeight(layer, x, t) {
@@ -177,8 +179,8 @@ export default function Ocean() {
     <div
       ref={container}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 bottom-0"
-      style={{ height: HEIGHT }}
+      className="pointer-events-none sticky shrink-0"
+      style={{ height: HEIGHT, bottom: PEEK - HEIGHT }}
     />
   );
 }

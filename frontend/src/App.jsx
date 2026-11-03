@@ -80,7 +80,7 @@ export default function App() {
         </div>
       )}
 
-      <main className="grid flex-1 gap-6 px-6 pb-44 pt-6 lg:grid-cols-2">
+      <main className="grid flex-1 gap-6 px-6 pb-6 pt-6 lg:grid-cols-2">
         <EmailPanel email={email} loading={loading && !email} />
         <ChatPanel
           messages={messages}
